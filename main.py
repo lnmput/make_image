@@ -25,7 +25,7 @@ draw.rectangle(
 )
 
 # 在矩形框内绘制文字
-font_size = 60
+font_size = 58
 font = ImageFont.truetype("arial.ttf", font_size)
 
 # 定义文字内容
@@ -73,10 +73,13 @@ total_text_height = sum(draw.textbbox((0, 0), line, font=font)[3] * line_height 
 # 计算 start_y，考虑矩形高度
 start_y = rectangle_y + (rectangle_height - total_text_height) // 2  # 上下居中
 
+# 修改文字颜色为黑色
+text_color = (255, 255, 255)
+
 # 逐行绘制文字
 for line in lines:
     text_width, text_height = draw.textbbox((0, 0), line, font=font)[2], draw.textbbox((0, 0), line, font=font)[3]
-    draw.text((start_x, start_y), line, font=font, fill=(0, 0, 0))
+    draw.text((start_x, start_y), line, font=font, fill=text_color)
     start_y += text_height * line_height  # 使用text_height和line_height确保文字行间距正确
 
 # 保存图片

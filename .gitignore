@@ -1,0 +1,22 @@
+/bootstrap/compiled.php
+/vendor
+/modules
+composer.phar
+.DS_Store
+.idea
+output_image.png
+.env
+*.json
+*.txt
+*.exe
+nginx-error.log
+nginx-access.log
+nginx-ssl.access.log
+nginx-ssl.error.log
+php-errors.log
+sftp-config.json
+selenium.php
+.user.ini
+.well-known
+# for netbeans
+nbproject
