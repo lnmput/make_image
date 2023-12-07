@@ -50,7 +50,6 @@ def create_area_box(image, a4_width, a4_height):
 
     # 逐行绘制文字
     for line in lines:
-        print(line)
         text_width, text_height = draw.textbbox((0, 0), line, font=font)[2], draw.textbbox((0, 0), line, font=font)[3]
         draw.text((start_x, start_y), line, font=font, fill=text_color)
         start_y += text_height * line_height  # 使用text_height和line_height确保文字行间距正确

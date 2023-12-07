@@ -13,7 +13,9 @@ def draw_square_border(draw, position, size, border_width, number=None):
         width=border_width
     )
     if number is not None:
-        font = ImageFont.load_default()
+        font_size = 40
+        font = ImageFont.truetype("arial.ttf", font_size)
+
         text_bbox = draw.textbbox((0, 0, 0, 0), str(number), font=font)
         text_width = text_bbox[2] - text_bbox[0]
         text_height = text_bbox[3] - text_bbox[1]
@@ -48,15 +50,17 @@ def generate_dom_image(a4_image, square_size=30, border_width=2, area_position=(
 
 
 def create_right_area(paper):
-    square_size = 30  # 矩形的边长
-    border_width = 2  # 矩形的border
-    area_position = (115, 115)  # 右边 左上角 坐标
-    area_size = (450, 700)  # 右边整个宽度和高度
+    square_size = 100  # 矩形的边长
+    border_width = 5  # 矩形的border
+    area_position = (500, 500)  # 右边 左上角 坐标
+    area_size = (1900, 2900)  # 右边整个宽度和高度
 
     word = "love"  # 单词
 
     dom_image = generate_dom_image(paper, square_size=square_size, border_width=border_width,
                                    area_position=area_position,
                                    area_size=area_size, word=word)
+
+    dom_image.save("output_image.png")
 
     dom_image.show()
