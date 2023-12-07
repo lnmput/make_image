@@ -1,17 +1,19 @@
 from PIL import Image, ImageDraw, ImageFont
 
+# A4纸的标准尺寸
+a4_width, a4_height = 2480, 3508
+
 # 创建一个白色背景的A4图片
-width, height = 2480, 3508  # A4纸的宽度和高度，单位是像素
-background_color = (31, 41, 55)  # 白色
-image = Image.new("RGB", (width, height), background_color)
+background_color = (255, 255, 255)  # 白色
+image = Image.new("RGB", (a4_width, a4_height), background_color)
 draw = ImageDraw.Draw(image)
 
 # 在图片内创建一个竖条的矩形框
 rectangle_width = 300  # 矩形框的宽度
-rectangle_height = height - 200  # 矩形框的高度，稍微小于A4高度，留出一些边距
+rectangle_height = a4_height - 200  # 矩形框的高度，稍微小于A4高度，留出一些边距
 rectangle_x = 90  # 距离左侧3cm
 rectangle_y = 100  # 上下边距为100像素
-rectangle_color = (255, 255, 255)  # 彩色边框的颜色
+rectangle_color = (0, 0, 0)  # 黑色边框的颜色
 border_width = 5  # 矩形边框的宽度
 corner_radius = 20  # 圆角的半径
 
@@ -74,7 +76,7 @@ total_text_height = sum(draw.textbbox((0, 0), line, font=font)[3] * line_height 
 start_y = rectangle_y + (rectangle_height - total_text_height) // 2  # 上下居中
 
 # 修改文字颜色为黑色
-text_color = (255, 255, 255)
+text_color = (0, 0, 0)
 
 # 逐行绘制文字
 for line in lines:
