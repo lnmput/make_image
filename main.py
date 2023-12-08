@@ -49,11 +49,14 @@ def generate_group_of_squares(image, square_size, border_width, area_position, a
 
     existing_squares = []
 
+    x_offset = random.randint(50, 150)  # 控制第一行第一组图片与右边界的随机距离
+    y_offset = 0
+
     for word in words:
         total_width = (square_size - border_width) * len(word) + border_width * (len(word) - 1)
 
         if x_offset + total_width > max_width:
-            x_offset = 0
+            x_offset = random.randint(50, 150)  # 控制下一行第一组图片与右边界的随机距离
             y_offset += group_height + random.randint(100, 200)  # 上下随机间距
             if y_offset + group_height > area_size[1]:
                 break  # 如果超出右边界，停止生成
