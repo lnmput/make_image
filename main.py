@@ -3,10 +3,17 @@ from paper import create_paper
 from right import create_right_area
 import random
 
+from title import add_rectangle_text
+
 if __name__ == "__main__":
     image, a4_width, a4_height = create_paper()
 
+    add_rectangle_text(image)
+
     create_left_area(image, a4_width, a4_height)
+
+
+
 
     # 你的单词列表
     word_list = ["love", "peace", "joy", "python", "coding", "art", "music", "science", "nature", "happy", "friend",
