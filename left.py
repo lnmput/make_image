@@ -1,7 +1,7 @@
 from PIL import ImageDraw, ImageFont
 
 
-def create_area_box(image, a4_width, a4_height):
+def create_left_area(image, a4_width, a4_height):
     draw = ImageDraw.Draw(image)
 
     # 在图片内创建一个竖条的矩形框

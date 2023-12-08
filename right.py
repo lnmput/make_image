@@ -1,4 +1,4 @@
-from PIL import ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont
 import random
 
 SQUARE_COLOR = "black"
@@ -10,10 +10,10 @@ def draw_square_border(draw, position, size, border_width, number=None):
     draw.rectangle(
         [(x, y), (x + size, y + size)],
         outline=SQUARE_COLOR,
-        width=border_width
+        width=2  # 边界宽度设置为 2
     )
     if number is not None:
-        font_size = 40
+        font_size = 48
         font = ImageFont.truetype("arial.ttf", font_size)
 
         text_bbox = draw.textbbox((0, 0, 0, 0), str(number), font=font)
@@ -23,43 +23,79 @@ def draw_square_border(draw, position, size, border_width, number=None):
         draw.text(text_position, str(number), fill=SQUARE_COLOR, font=font)
 
 
-def generate_group_of_squares(image, square_size, border_width, area_position, area_size, word,
-                              area_color=DEFAULT_AREA_COLOR):
+
+def is_overlap(square_position, square_size, existing_squares):
+    """
+    检查新的正方形是否与已有的正方形相交
+    """
+    x1, y1 = square_position
+    x2, y2 = x1 + square_size, y1 + square_size
+
+    for existing_square in existing_squares:
+        ex1, ey1, ex2, ey2 = existing_square
+        if not (x2 < ex1 or x1 > ex2 or y2 < ey1 or y1 > ey2):
+            return True  # 相交
+
+    return False  # 不相交
+
+
+def generate_group_of_squares(image, square_size, border_width, area_position, area_size, words, area_color=DEFAULT_AREA_COLOR):
     draw = ImageDraw.Draw(image)
     draw.rectangle([area_position, (area_position[0] + area_size[0], area_position[1] + area_size[1])], fill=area_color)
 
-    total_width = (square_size - border_width) * len(word) + border_width * (len(word) - 1)
+    x_offset = 0
+    y_offset = 0
+    max_width = area_size[0]
     group_height = square_size
 
-    x_position = random.randint(area_position[0], area_position[0] + area_size[0] - total_width)
-    y_position = random.randint(area_position[1], area_position[1] + area_size[1] - group_height)
+    existing_squares = []
 
-    for i, char in enumerate(word):
-        if i > 0:
-            x_position += border_width
-        square_position = (x_position + i * (square_size - border_width), y_position)
-        draw_square_border(draw, square_position, square_size, border_width, number=ord(char.lower()) - ord('a') + 1)
+    x_offset = random.randint(50, 150)  # 控制第一行第一组图片与右边界的随机距离
+    y_offset = 0
+
+    for word in words:
+        total_width = (square_size - border_width) * len(word) + border_width * (len(word) - 1)
+
+        if x_offset + total_width > max_width:
+            x_offset = random.randint(50, 150)  # 控制下一行第一组图片与右边界的随机距离
+            y_offset += group_height + random.randint(100, 200)  # 上下随机间距
+            if y_offset + group_height > area_size[1]:
+                break  # 如果超出右边界，停止生成
+
+        for i, char in enumerate(word):
+            if i > 0:
+                x_offset += border_width
+            square_position = (area_position[0] + x_offset, area_position[1] + y_offset)
+
+            draw_square_border(draw, square_position, square_size, border_width, number=ord(char.lower()) - ord('a') + 1)
+            existing_squares.append((square_position[0], square_position[1], square_position[0] + square_size,
+                                     square_position[1] + square_size))
+
+            x_offset += square_size - border_width
+
+        x_offset += random.randint(50, 100)  # 组与组之间的左右随机间距
 
     return image
 
 
 def generate_dom_image(a4_image, square_size=30, border_width=2, area_position=(50, 50),
-                       area_size=(400, 600), word="love", area_color=DEFAULT_AREA_COLOR):
-    generate_group_of_squares(a4_image, square_size, border_width, area_position, area_size, word, area_color)
+                       area_size=(400, 600), words=None, area_color=DEFAULT_AREA_COLOR):
+    if words is None:
+        words = ["love"]
+
+    generate_group_of_squares(a4_image, square_size, border_width, area_position, area_size, words, area_color)
     return a4_image
 
 
-def create_right_area(paper):
-    square_size = 100  # 矩形的边长
+def create_right_area(paper, words):
+    square_size = 120  # 矩形的边长
     border_width = 5  # 矩形的border
     area_position = (500, 500)  # 右边 左上角 坐标
     area_size = (1900, 2900)  # 右边整个宽度和高度
 
-    word = "love"  # 单词
-
     dom_image = generate_dom_image(paper, square_size=square_size, border_width=border_width,
                                    area_position=area_position,
-                                   area_size=area_size, word=word)
+                                   area_size=area_size, words=words)
 
     dom_image.save("output_image.png")
 
