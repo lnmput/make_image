@@ -10,7 +10,7 @@ def draw_square_border(draw, position, size, border_width, number=None):
     draw.rectangle(
         [(x, y), (x + size, y + size)],
         outline=SQUARE_COLOR,
-        width=border_width
+        width=2  # 边界宽度设置为 2
     )
     if number is not None:
         font_size = 48
@@ -21,6 +21,7 @@ def draw_square_border(draw, position, size, border_width, number=None):
         text_height = text_bbox[3] - text_bbox[1]
         text_position = (x + (size - text_width) // 2, y + size)
         draw.text(text_position, str(number), fill=SQUARE_COLOR, font=font)
+
 
 
 def is_overlap(square_position, square_size, existing_squares):
