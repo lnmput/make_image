@@ -1,24 +1,24 @@
 from PIL import Image, ImageDraw, ImageFont
 
 
-def add_title_text(image):
+def add_profile_text(image):
     # 创建画布对象
     draw = ImageDraw.Draw(image)
 
     # 矩形的位置参数 (左上角x坐标, 左上角y坐标, 右下角x坐标, 右下角y坐标)
-    rect_position = (500, 190, 2400, 400)  # 调整后的位置参数
+    rect_position = (500, 100, 2400, 200)  # 调整后的位置参数
 
     # 矩形的背景颜色（灰色）
-    rect_color = (169, 169, 169)  # 灰色
+    rect_color = (255, 255, 255)  # 灰色
 
     # 在指定位置绘制矩形
     draw.rectangle(rect_position, fill=rect_color)
 
     # 指定文字内容
-    text_content = "五 颜 六 色"
+    text_content = "将对应的代码填入方框内,你会得到一些单词,你知道这些单词的意思吗?"
 
     # 获取字体
-    font_size = 80
+    font_size = 45
     font = ImageFont.truetype("arial.ttf", font_size)
 
     # 计算适应矩形大小的字体大小
@@ -40,6 +40,6 @@ def add_title_text(image):
     text_y = (rect_position[3] + rect_position[1] - text_height) / 2 - text_bbox[1]  # 考虑文本基线位置
 
     # 在矩形内填充文字
-    draw.text((text_x, text_y), text_content, fill=(0, 0, 0), font=font)
+    draw.text((500, text_y), text_content, fill=(0, 0, 0), font=font)
 
     return image

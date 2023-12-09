@@ -1,14 +1,16 @@
 from left import create_left_area
 from paper import create_paper
+from profile import add_profile_text
 from right import create_right_area
 import random
 
-from title import add_rectangle_text
+from title import add_title_text
 
 if __name__ == "__main__":
     image, a4_width, a4_height = create_paper()
 
-    add_rectangle_text(image)
+    add_profile_text(image)
+    add_title_text(image)
 
     create_left_area(image, a4_width, a4_height)
 
@@ -21,6 +23,6 @@ if __name__ == "__main__":
                  "kindness", "success", "blessing", "harmony", "courage", "imagine", "serenity", "balance", "gratitude"]
 
     # 从单词列表中随机选择一些单词
-    selected_words = random.sample(word_list, k=20)
+    selected_words = random.sample(word_list, k=25)
 
     create_right_area(image, selected_words)
