@@ -41,7 +41,21 @@ def is_overlap(square_position, square_size, existing_squares):
 
 def generate_group_of_squares(image, square_size, border_width, area_position, area_size, words, area_color=DEFAULT_AREA_COLOR):
     draw = ImageDraw.Draw(image)
-    draw.rectangle([area_position, (area_position[0] + area_size[0], area_position[1] + area_size[1])], fill=area_color)
+
+    # 假设外边距为 margin
+    margin = 20  # 可以根据需要调整外边距的大小
+
+    # 调整 area_position 和 area_size 以添加外边距
+    draw.rectangle(
+        [
+            (area_position[0] - margin, area_position[1] - margin),
+            (
+                area_position[0] + area_size[0] + margin,
+                area_position[1] + area_size[1] + margin,
+            ),
+        ],
+        fill=area_color
+    )
 
     x_offset = 0
     y_offset = 0
@@ -90,8 +104,8 @@ def generate_dom_image(a4_image, square_size=30, border_width=2, area_position=(
 def create_right_area(paper, words):
     square_size = 120  # 矩形的边长
     border_width = 5  # 矩形的border
-    area_position = (500, 500)  # 右边 左上角 坐标
-    area_size = (1900, 2900)  # 右边整个宽度和高度
+    area_position = (520, 500)  # 右边 左上角 坐标
+    area_size = (1860, 2880)  # 右边整个宽度和高度
 
     dom_image = generate_dom_image(paper, square_size=square_size, border_width=border_width,
                                    area_position=area_position,
