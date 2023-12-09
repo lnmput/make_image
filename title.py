@@ -15,7 +15,7 @@ def add_title_text(image):
     draw.rectangle(rect_position, fill=rect_color)
 
     # 指定文字内容
-    text_content = "五 颜 六 色"
+    text_content = "我 的 水 果 园"
 
     # 获取字体
     font_size = 80

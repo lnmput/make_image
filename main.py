@@ -14,15 +14,13 @@ if __name__ == "__main__":
 
     create_left_area(image, a4_width, a4_height)
 
-
-
-
     # 你的单词列表
-    word_list = ["love", "peace", "joy", "python", "coding", "art", "music", "science", "nature", "happy", "friend",
-                 "family", "travel", "beach", "dream", "smile", "laughter", "freedom", "inspire", "create", "hope",
-                 "kindness", "success", "blessing", "harmony", "courage", "imagine", "serenity", "balance", "gratitude"]
+    word_list = [
+        "apple", "pear", "peach", "strawberry", "grape", "kiwi", "banana", "watermelon",
+        "orange", "mango", "lemon", "cherry", "tomato", "hamimelon", "peanut",
+    ]
 
     # 从单词列表中随机选择一些单词
-    selected_words = random.sample(word_list, k=25)
+    selected_words = random.sample(word_list, k=15)
 
     create_right_area(image, selected_words)
