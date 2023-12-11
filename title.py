@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 
 
-def add_title_text(image):
+def add_title_text(image, title):
     # 创建画布对象
     draw = ImageDraw.Draw(image)
 
@@ -14,9 +14,6 @@ def add_title_text(image):
     # 在指定位置绘制矩形
     draw.rectangle(rect_position, fill=rect_color)
 
-    # 指定文字内容
-    text_content = "我 的 水 果 园"
-
     # 获取字体
     font_size = 80
     font = ImageFont.truetype("arial.ttf", font_size)
@@ -24,7 +21,7 @@ def add_title_text(image):
     # 计算适应矩形大小的字体大小
     while True:
         # 获取文字的尺寸
-        text_bbox = draw.textbbox((0, 0), text_content, font=font)
+        text_bbox = draw.textbbox((0, 0), title, font=font)
         text_width, text_height = text_bbox[2] - text_bbox[0], text_bbox[3] - text_bbox[1]
 
         # 检查文字是否超出矩形边框
@@ -40,6 +37,6 @@ def add_title_text(image):
     text_y = (rect_position[3] + rect_position[1] - text_height) / 2 - text_bbox[1]  # 考虑文本基线位置
 
     # 在矩形内填充文字
-    draw.text((text_x, text_y), text_content, fill=(0, 0, 0), font=font)
+    draw.text((text_x, text_y), title, fill=(0, 0, 0), font=font)
 
     return image
