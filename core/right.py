@@ -14,14 +14,13 @@ def draw_square_border(draw, position, size, border_width, number=None):
     )
     if number is not None:
         font_size = 48
-        font = ImageFont.truetype("arial.ttf", font_size)
+        font = ImageFont.truetype("./fonts/arial.ttf", font_size)
 
         text_bbox = draw.textbbox((0, 0, 0, 0), str(number), font=font)
         text_width = text_bbox[2] - text_bbox[0]
         text_height = text_bbox[3] - text_bbox[1]
         text_position = (x + (size - text_width) // 2, y + size)
         draw.text(text_position, str(number), fill=SQUARE_COLOR, font=font)
-
 
 
 def is_overlap(square_position, square_size, existing_squares):
@@ -39,7 +38,8 @@ def is_overlap(square_position, square_size, existing_squares):
     return False  # 不相交
 
 
-def generate_group_of_squares(image, square_size, border_width, area_position, area_size, words, area_color=DEFAULT_AREA_COLOR):
+def generate_group_of_squares(image, square_size, border_width, area_position, area_size, words,
+                              area_color=DEFAULT_AREA_COLOR):
     draw = ImageDraw.Draw(image)
 
     # 假设外边距为 margin
@@ -81,7 +81,8 @@ def generate_group_of_squares(image, square_size, border_width, area_position, a
                 x_offset += border_width
             square_position = (area_position[0] + x_offset, area_position[1] + y_offset)
 
-            draw_square_border(draw, square_position, square_size, border_width, number=ord(char.lower()) - ord('a') + 1)
+            draw_square_border(draw, square_position, square_size, border_width,
+                               number=ord(char.lower()) - ord('a') + 1)
             existing_squares.append((square_position[0], square_position[1], square_position[0] + square_size,
                                      square_position[1] + square_size))
 
@@ -111,6 +112,6 @@ def create_right_area(paper, words):
                                    area_position=area_position,
                                    area_size=area_size, words=words)
 
-    dom_image.save("output_image.png")
+    # dom_image.save("output_image.png")
 
     dom_image.show()

@@ -19,7 +19,7 @@ def add_profile_text(image):
 
     # 获取字体
     font_size = 45
-    font = ImageFont.truetype("arial.ttf", font_size)
+    font = ImageFont.truetype("./fonts/arial.ttf", font_size)
 
     # 计算适应矩形大小的字体大小
     while True:
@@ -33,7 +33,7 @@ def add_profile_text(image):
 
         # 如果文字超出矩形边框，减小字体大小并重新计算
         font_size -= 1
-        font = ImageFont.truetype("arial.ttf", font_size)
+        font = ImageFont.truetype("./fonts/arial.ttf", font_size)
 
     # 计算文字位置使其上下居中在矩形内
     text_x = (rect_position[2] + rect_position[0] - text_width) / 2

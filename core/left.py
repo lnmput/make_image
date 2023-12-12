@@ -24,7 +24,7 @@ def create_left_area(image, a4_width, a4_height):
 
     # 在矩形框内绘制文字
     font_size = 58
-    font = ImageFont.truetype("arial.ttf", font_size)
+    font = ImageFont.truetype("./fonts/arial.ttf", font_size)
 
     # 定义文字内容
     text_content = ("1=A,2=B,3=C,4=D,5=E,6=F,7=G,8=H,9=I,10=J,11=K,12=L,13=M,14=N,15=O,16=P,17=Q,18=R,19=S,20=T,21=U,"
