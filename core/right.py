@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import random
 
+
 SQUARE_COLOR = "black"
 DEFAULT_AREA_COLOR = "lightgray"
 
@@ -114,4 +115,6 @@ def create_right_area(paper, words):
 
     # dom_image.save("output_image.png")
 
-    dom_image.show()
+    # return dom_image.show()
+
+
