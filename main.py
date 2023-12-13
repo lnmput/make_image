@@ -6,7 +6,12 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello():
+def home():
+    return render_template('index.html')
+
+
+@app.route('/create')
+def create():
     base64_image = make_image()
     return jsonify({'image': base64_image})
 
