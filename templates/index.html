@@ -149,17 +149,6 @@
                 </svg>
               </span>
             </button>
-
-            <!--
-              Dropdown menu, show/hide based on menu state.
-
-              Entering: "transition ease-out duration-100"
-                From: "transform opacity-0 scale-95"
-                To: "transform opacity-100 scale-100"
-              Leaving: "transition ease-in duration-75"
-                From: "transform opacity-100 scale-100"
-                To: "transform opacity-0 scale-95"
-            -->
             <div class="absolute hidden right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
               <!-- Active: "bg-gray-50", Not Active: "" -->
               <a href="#" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-0">Your profile</a>
@@ -181,8 +170,62 @@
      {% include 'widgets/input.html' %}
   </aside>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#submit-btn').click(function() {
 
+              let title = $('#title').val();
+              let words = $('#words').val();
+              if (title === '' || words === '') {
+                alert('Please fill in the title or words.');
+                return;
+              }
 
+              // 判断words格式是否满足要求, 每个单词的长度不能超过10个字符, 且至少有两个单词,而且必须是英文单词,并指出有问题的单词
+              let wordsArray = words.split(',');
+              if (wordsArray.length < 2) {
+                  alert('Please enter at least two words.');
+                  return;
+              }
+              for (let i = 0; i < wordsArray.length; i++) {
+                  if (wordsArray[i].length > 15) {
+                      alert('Each word should not exceed 15 characters.');
+                      return;
+                  }
+                  // 判断之前去掉空格
+                    wordsArray[i] = wordsArray[i].trim();
+                    if (!wordsArray[i].match(/^[a-zA-Z]+$/)) {
+                        alert('word '+wordsArray[i]+' should be an English word.');
+                        return;
+                    }
+              }
+
+              var dataToSend = {
+                  // 准备要发送的数据
+                  'title': title,
+                  'words': words
+              };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/create',
+                    contentType: 'application/json;charset=UTF-8',
+                    data: JSON.stringify(dataToSend),
+                    success: function(response) {
+                        console.log(response);
+                        // 处理成功返回的数据
+                        $('#result').text(response.message);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        // 处理错误
+                        $('#result').text('Error occurred');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 

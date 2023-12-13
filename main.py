@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 
 from api.start import make_image
 
@@ -10,10 +10,18 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/create')
+@app.route('/create', methods=['POST'])
 def create():
-    base64_image = make_image()
-    return jsonify({'image': base64_image})
+    data = request.json
+    # 在这里处理提交的数据
+    # 假设你想要返回处理后的数据
+    title = data.get('title')
+    words = data.get('words')
+
+    base64_img = make_image(title, words)
+
+    processed_data = {'base64_img': base64_img}
+    return jsonify(processed_data)
 
 
 @app.route('/test')

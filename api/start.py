@@ -9,14 +9,16 @@ from core.right import create_right_area
 from core.title import add_title_text
 
 
-def make_image():
+def make_image(title, words):
     # 你的单词列表
-    word_list = [
-        "apple", "pear", "peach", "strawberry", "grape", "kiwi", "banana", "watermelon",
-        "orange", "mango", "lemon", "cherry", "tomato", "hamimelon", "peanut",
-    ]
+    # word_list = [
+    #     "apple", "pear", "peach", "strawberry", "grape", "kiwi", "banana", "watermelon",
+    #     "orange", "mango", "lemon", "cherry", "tomato", "hamimelon", "peanut",
+    # ]
+    #
+    # title = "我的石锅鱼"
 
-    title = "我的石锅鱼"
+    word_list = words.split(',') if words else []
 
     # 设置 k 的值
     k = 30
@@ -45,6 +47,3 @@ def make_image():
     img_str = base64.b64encode(buffered.getvalue()).decode('utf-8')
 
     return img_str
-
-
-
