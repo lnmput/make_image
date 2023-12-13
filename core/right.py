@@ -69,7 +69,9 @@ def generate_group_of_squares(image, square_size, border_width, area_position, a
     y_offset = 0
 
     for word in words:
-        print(word)
+        word = word.lower()
+        # 去掉空格
+        word = word.replace(" ", "")
         total_width = (square_size - border_width) * len(word) + border_width * (len(word) - 1)
 
         if x_offset + total_width > max_width:
@@ -114,7 +116,7 @@ def create_right_area(paper, words):
                                    area_position=area_position,
                                    area_size=area_size, words=words)
 
-    dom_image.save("output_image.png")
+    # dom_image.save("output_image.png")
 
     # return dom_image.show()
 

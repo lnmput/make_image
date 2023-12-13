@@ -214,8 +214,10 @@
                     data: JSON.stringify(dataToSend),
                     success: function(response) {
                         console.log(response);
-                        // 处理成功返回的数据
-                        $('#result').text(response.message);
+                        // 处理成功返回的数据, 获得图片的url
+                      console.log(response.base64_img);
+                        $('#output_image').attr('src',"data:image/png;base64,"+response.base64_img);
+                         //$('#image-container').html('<img src="data:image/png;base64,' + response.base64_img + '">');
                     },
                     error: function(error) {
                         console.log(error);
